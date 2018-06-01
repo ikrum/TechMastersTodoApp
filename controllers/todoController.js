@@ -1,12 +1,7 @@
-var express = require('express');
-var router = express.Router();
-
-router.get("/v1/todos", getTodos);
-router.get("/v1/todos/:todoID", getSingleTodo);
-router.post("/v1/todos", addTodo);
-
 const todos = [];
-function addTodo(req,res){
+
+
+exports.addTodo = function (req,res){
   const todo = {
     "id": Date.now() % 100,
     "title": "Hello",
@@ -21,7 +16,7 @@ function addTodo(req,res){
   res.json(obj);
 }
 
-function getSingleTodo(req,res){
+exports.getSingleTodo = function (req,res){
   req.params.todoID
   for(let i = 0 ; i< todos.length; i++){
     if(todos[i].id == req.params.todoID){
@@ -42,7 +37,7 @@ function getSingleTodo(req,res){
   res.json(obj);
 }
 
-function getTodos(req,res){
+exports.getTodos = function (req,res){
   const obj = {
     error: false,
     message: "",
@@ -50,5 +45,3 @@ function getTodos(req,res){
   };
   res.json(obj);
 }
-
-module.exports = router;
